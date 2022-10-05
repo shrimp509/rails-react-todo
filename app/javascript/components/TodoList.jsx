@@ -5,8 +5,8 @@ import Todo from './Todo'
 function TodoList(props) {
     return <div>
         <ul>
-            { props.todos.map((todo) => {
-                return <li><Todo content={ todo } /></li>
+            { props.todos.map((todo, index) => {
+                return <li><Todo content={ todo } index={ index } removeTodo={ props.removeTodo } /></li>
             }) }
         </ul>
     </div>

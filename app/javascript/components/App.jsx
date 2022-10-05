@@ -10,9 +10,13 @@ function App() {
         setTodos([...todos, newTodo])
     }
 
+    const removeTodo = (todoIndex) => {
+        setTodos(todos.filter( (_, index) => index != todoIndex ))
+    }
+
     return <div>
         <h1>Simple Todo App</h1>
-        <TodoList todos={ todos } />
+        <TodoList todos={ todos } removeTodo={ removeTodo } />
         <TodoAdder addNewTodo={ addNewTodo }/>
     </div>
 }
