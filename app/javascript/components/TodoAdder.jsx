@@ -5,6 +5,8 @@ function TodoAdder(props) {
 
     const onSubmitHandler = (event) => {
         event.preventDefault()
+        if (newTodo.current.value === '') return false
+        
         props.addNewTodo(newTodo.current.value)
         newTodo.current.value = ''
     }
