@@ -15,7 +15,7 @@ function UpdatingTodo(props) {
         props.setUpdating(false)
     }
 
-    return <form onSubmit={ onSubmitHandler } style={{ display: 'inline-block' }}>
+    return <form onSubmit={onSubmitHandler} style={{ display: 'inline-block' }}>
                 <input type='text' autoFocus value={newTodo} placeholder={todo} onChange={e => {setNewTodo(e.target.value)}} onBlur={onBlurHandler}></input>
             </form>
 }

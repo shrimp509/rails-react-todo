@@ -15,10 +15,15 @@ function App() {
     }, [])
 
     const addNewTodo = (newTodo) => {
-        addTodoThruApi(newTodo).then((response) => {
+        addTodoThruApi(newTodo)
+        .then((response) => {
             if (response.status != 200) {
                 console.log(`Add todo ${newTodo} failed`); return;
             }
+            return response.json()
+        })
+        .then((response) => {
+            newTodo['id'] = response.data.id
             setTodos([...todos, newTodo])
         })
     }
