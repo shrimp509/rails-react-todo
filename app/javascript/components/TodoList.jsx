@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react'
 
 import Todo from './Todo'
 
-function TodoList() {
+function TodoList(props) {
     return <div>
         <ul>
-            <li><Todo content="This is my todo."/></li>
+            { props.todos.map((todo) => {
+                return <li><Todo content={ todo } /></li>
+            }) }
         </ul>
     </div>
 }
