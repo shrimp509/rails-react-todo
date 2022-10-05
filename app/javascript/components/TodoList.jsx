@@ -6,7 +6,7 @@ function TodoList(props) {
     return <div>
         <ul>
             { props.todos.map((todo, index) => {
-                return <li key={ index }><Todo todo={ todo } index={ index } removeTodo={ props.removeTodo } /></li>
+                return <li key={`${todo.name}${index}`}><Todo todo={todo} index={index} removeTodo={props.removeTodo} updateTodo={props.updateTodo} /></li>
             }) }
         </ul>
     </div>
