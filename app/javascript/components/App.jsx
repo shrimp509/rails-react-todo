@@ -1,24 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react'
 
 import TodoList from './TodoList'
+import TodoAdder from './TodoAdder'
 
 function App() {
-    const newTodo = useRef('')
     const [todos, setTodos] = useState(['first todo', 'second todo', 'third todo'])
 
-    const onSubmitHandler = (event) => {
-        event.preventDefault()
-        setTodos([...todos, newTodo.current.value])
-        newTodo.current.value = ''
+    const addNewTodo = (newTodo) => {
+        setTodos([...todos, newTodo])
     }
 
     return <div>
         <h1>Simple Todo App</h1>
         <TodoList todos={ todos } />
-        <form onSubmit={ onSubmitHandler }>
-            <input type="text" ref={ newTodo }></input>
-            <input type="submit" value="+" />
-        </form>
+        <TodoAdder addNewTodo={ addNewTodo }/>
     </div>
 }
 
