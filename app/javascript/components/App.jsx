@@ -35,6 +35,16 @@ function App() {
         .catch(error => console.error("Error: " + error))
     }
 
+    const removeTodoThruApi = (todo) => {
+        fetch(`http://127.0.0.1:3000/api/v1/todos/${todo.id}`, {
+            method: 'DELETE'
+        })
+        .then((response) => {
+            console.log(response.json())
+        })
+        .catch(error => console.error("Error: " + error))
+    }
+
     const [todos, setTodos] = useState(initTodos)
 
     useEffect(() => {
@@ -47,6 +57,7 @@ function App() {
     }
 
     const removeTodo = (todoIndex) => {
+        removeTodoThruApi(todos[todoIndex])
         setTodos(todos.filter( (_, index) => index != todoIndex ))
     }
 
