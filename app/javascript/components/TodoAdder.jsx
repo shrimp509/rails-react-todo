@@ -7,7 +7,10 @@ function TodoAdder(props) {
         event.preventDefault()
         if (newTodo.current.value === '') return false
         
-        props.addNewTodo(newTodo.current.value)
+        props.addNewTodo({
+            name: newTodo.current.value,
+            status: 'created'
+        })
         newTodo.current.value = ''
     }
 
