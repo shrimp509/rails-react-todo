@@ -1,42 +1,31 @@
+import axios from 'axios'
+
+const HOST_URL = 'http://127.0.0.1:3000/api/v1'
 
 export const getTodosThruApi = () => {
-  return fetch('http://127.0.0.1:3000/api/v1/todos')
+  return axios.get(`${HOST_URL}/todos`)
           .then((response) => {
-              return response.json()
+            return response.data
           })
           .catch(error => console.error("Error: " + error))
 }
 
 export const addTodoThruApi = (todo) => {
-  return fetch('http://127.0.0.1:3000/api/v1/todos', {
-                method: 'POST',
-                body: JSON.stringify({
-                    name: todo.name
-                }),
-                headers: new Headers({
-                    'Content-Type': 'application/json'
-                })
+  return axios.post(`${HOST_URL}/todos`, {
+              name: todo.name
             })
             .catch(error => console.error("Error: " + error))
 }
 
 export const updateTodoThruApi = (id, newName, newStatus = undefined) => {
-    return fetch(`http://127.0.0.1:3000/api/v1/todos/${id}`, {
-                  method: 'PUT',
-                  body: JSON.stringify({
-                    name: newName,
-                    status: newStatus === undefined ? undefined : newStatus
-                  }),
-                  headers: new Headers({
-                      'Content-Type': 'application/json'
-                  })
+    return axios.put(`${HOST_URL}/todos/${id}`, {
+                name: newName,
+                status: newStatus === undefined ? undefined : newStatus
               })
               .catch(error => console.error("Error: " + error))
   }
 
 export const removeTodoThruApi = (todo) => {
-  return fetch(`http://127.0.0.1:3000/api/v1/todos/${todo.id}`, {
-              method: 'DELETE'
-          })
-          .catch(error => console.error("Error: " + error))
+  return axios.delete(`http://127.0.0.1:3000/api/v1/todos/${todo.id}`)
+              .catch(error => console.error("Error: " + error))
 }

@@ -28,7 +28,7 @@ function App() {
             if (response.status != 200) {
                 setMsg(`Add todo ${newTodo} failed`); return;
             }
-            return response.json()
+            return response
         })
         .then((response) => {
             newTodo['id'] = response.data.id
