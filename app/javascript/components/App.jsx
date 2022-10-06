@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 
+import Snackbar from '@mui/material/Snackbar';
+import Container from '@mui/material/Container';
+
 import TodoList from './TodoList'
 import TodoAdder from './TodoAdder'
 
@@ -7,6 +10,7 @@ import { getTodosThruApi, addTodoThruApi, removeTodoThruApi, updateTodoThruApi }
 
 function App() {
     const [todos, setTodos] = useState([])
+    const [msg, setMsg] = useState('')
 
     useEffect(() => {
         getTodosThruApi().then((response) => {
@@ -14,25 +18,31 @@ function App() {
         })
     }, [])
 
+    const handleClose = () => {
+        setMsg('')
+    }
+
     const addNewTodo = (newTodo) => {
         addTodoThruApi(newTodo)
         .then((response) => {
             if (response.status != 200) {
-                console.log(`Add todo ${newTodo} failed`); return;
+                setMsg(`Add todo ${newTodo} failed`); return;
             }
             return response.json()
         })
         .then((response) => {
             newTodo['id'] = response.data.id
             setTodos([...todos, newTodo])
+            setMsg(`New todo: ${newTodo.name} created`)
         })
     }
 
     const removeTodo = (todoIndex) => {
         removeTodoThruApi(todos[todoIndex]).then((response) => {
             if (response.status != 200) {
-                console.log(`Remove todo ${todos[todoIndex]} failed`); return;
+                setMsg(`Remove todo ${todos[todoIndex]} failed`); return;
             }
+            setMsg(`Remove todo ${todos[todoIndex].name}`)
             setTodos(todos.filter((_, index) => index != todoIndex))
         })
     }
@@ -40,8 +50,9 @@ function App() {
     const updateTodo = (todoIndex, newName, newStatus = undefined) => {
         updateTodoThruApi(todos[todoIndex].id, newName, newStatus).then((response) => {
             if (response.status != 200) {
-                console.log(`Update todo ${todos[todoIndex]} failed`); return;
+                setMsg(`Update todo ${todos[todoIndex]} failed`); return;
             }
+            setMsg(`Update todo ${newName}`)
             let newArr = [...todos]
             newArr[todoIndex].name = newName
             if (newStatus != undefined) newArr[todoIndex].status = newStatus
@@ -49,11 +60,18 @@ function App() {
         })
     }
 
-    return <div>
-        <h1>Simple Todo App</h1>
-        <TodoList todos={todos} removeTodo={removeTodo} updateTodo={updateTodo} />
-        <TodoAdder addNewTodo={addNewTodo}/>
-    </div>
+    return <Container maxWidth="sm">
+                <h1 style={{ textAlign: 'center' }}>Simple Todo App</h1>
+                <TodoList todos={todos} removeTodo={removeTodo} updateTodo={updateTodo} />
+                <TodoAdder addNewTodo={addNewTodo}/>
+                <Snackbar
+                    open={msg != ''}
+                    autoHideDuration={2000}
+                    anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                    onClose={handleClose}
+                    message={msg}
+                />
+            </Container>
 }
 
 export default App
