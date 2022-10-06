@@ -6,7 +6,7 @@ import PlainTextTodo from './PlainTextTodo'
 function Todo(props) {
     const [updating, setUpdating] = useState(false)
 
-    const handleClick = event => {
+    const onDoubleClick = event => {
         if (event.detail < 2) return
         setUpdating(true)
     }
@@ -15,7 +15,7 @@ function Todo(props) {
                 { updating ?
                     <UpdatingTodo todo={props.todo} updateTodo={props.updateTodo} index={props.index} setUpdating={setUpdating} />
                     :
-                    <PlainTextTodo onClick={handleClick} todo={props.todo} />
+                    <PlainTextTodo onDoubleClick={onDoubleClick} todo={props.todo} />
                 }
                 <input type="button" value="-" style={{ marginLeft: 8 }} onClick={() => props.removeTodo(props.index)}/>
             </div>
