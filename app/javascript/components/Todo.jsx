@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 import UpdatingTodo from './UpdatingTodo'
 import PlainTextTodo from './PlainTextTodo'
 
@@ -17,7 +20,9 @@ function Todo(props) {
                     :
                     <PlainTextTodo onDoubleClick={onDoubleClick} updateTodo={props.updateTodo} index={props.index} todo={props.todo} />
                 }
-                <input type="button" value="-" style={{ marginLeft: 8 }} onClick={() => props.removeTodo(props.index)}/>
+                <IconButton aria-label="delete" size="small" onClick={() => props.removeTodo(props.index)}>
+                    <DeleteIcon fontSize="inherit" />
+                </IconButton>
             </div>
 }
 
