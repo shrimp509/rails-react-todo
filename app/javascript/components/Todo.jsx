@@ -14,7 +14,7 @@ function Todo(props) {
         setUpdating(true)
     }
 
-    return <div>
+    return <div style={{ width: '100%' }}>
                 { updating ?
                     <UpdatingTodo todo={props.todo} updateTodo={props.updateTodo} index={props.index} setUpdating={setUpdating} />
                     :

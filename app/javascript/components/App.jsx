@@ -28,10 +28,8 @@ function App() {
             if (response.status != 200) {
                 setMsg(`Add todo ${newTodo} failed`); return;
             }
-            return response
-        })
-        .then((response) => {
-            newTodo['id'] = response.data.id
+            newTodo['id'] = response.data.data.id
+            console.log(newTodo)
             setTodos([...todos, newTodo])
             setMsg(`New todo: ${newTodo.name} created`)
         })
