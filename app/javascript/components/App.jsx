@@ -62,8 +62,8 @@ function App() {
 
     return <Container maxWidth="sm">
                 <h1 style={{ textAlign: 'center' }}>Simple Todo App</h1>
-                <TodoList todos={todos} removeTodo={removeTodo} updateTodo={updateTodo} />
                 <TodoAdder addNewTodo={addNewTodo}/>
+                <TodoList todos={todos} removeTodo={removeTodo} updateTodo={updateTodo} />
                 <Snackbar
                     open={msg != ''}
                     autoHideDuration={2000}
