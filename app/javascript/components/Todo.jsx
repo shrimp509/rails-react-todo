@@ -15,7 +15,7 @@ function Todo(props) {
                 { updating ?
                     <UpdatingTodo todo={props.todo} updateTodo={props.updateTodo} index={props.index} setUpdating={setUpdating} />
                     :
-                    <PlainTextTodo onDoubleClick={onDoubleClick} todo={props.todo} />
+                    <PlainTextTodo onDoubleClick={onDoubleClick} updateTodo={props.updateTodo} index={props.index} todo={props.todo} />
                 }
                 <input type="button" value="-" style={{ marginLeft: 8 }} onClick={() => props.removeTodo(props.index)}/>
             </div>

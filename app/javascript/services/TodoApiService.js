@@ -20,11 +20,12 @@ export const addTodoThruApi = (todo) => {
             .catch(error => console.error("Error: " + error))
 }
 
-export const updateTodoThruApi = (id, newName) => {
+export const updateTodoThruApi = (id, newName, newStatus = undefined) => {
     return fetch(`http://127.0.0.1:3000/api/v1/todos/${id}`, {
                   method: 'PUT',
                   body: JSON.stringify({
-                      name: newName
+                    name: newName,
+                    status: newStatus === undefined ? undefined : newStatus
                   }),
                   headers: new Headers({
                       'Content-Type': 'application/json'

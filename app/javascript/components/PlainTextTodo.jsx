@@ -3,17 +3,22 @@ import React, { useState, useEffect, useRef } from 'react'
 import Checkbox from '@mui/material/Checkbox';
 
 function PlainTextTodo(props) {
+    const createdStyle = { textDecoration: 'none', color: 'black' }
+    const doneStyle = { textDecoration: 'line-through', color: 'gray' }
+
     const [checked, setChecked] = useState(props.todo.status === 'done')
-    const [todoStyle, setTodoStyle] = useState({ textDecoration: 'none' })
+    const [todoStyle, setTodoStyle] = useState(createdStyle)
 
     useEffect(() => {
         checked ?
-            setTodoStyle({...todoStyle, textDecoration: 'line-through', color: 'gray'})
+            setTodoStyle({...todoStyle, ...doneStyle})
             :
-            setTodoStyle({...todoStyle, textDecoration: 'none', color: 'black'})
+            setTodoStyle({...todoStyle, ...createdStyle})
     }, [checked])
 
     const onCheckboxClick = event => {
+        var status = !checked ? 'done' : 'created'
+        props.updateTodo(props.index, props.todo.name, status)
         setChecked(!checked)
     }
 
@@ -26,7 +31,7 @@ function PlainTextTodo(props) {
                   inputProps={{ 'aria-labelledby': props.todo.name }}
                   onClick={onCheckboxClick}
                 />
-                <span style={todoStyle} onClick={props.onDoubleClick}>{ props.todo.name }</span>
+                <span style={todoStyle} onClick={props.onDoubleClick}>{props.todo.name}</span>
             </p>
 }
 

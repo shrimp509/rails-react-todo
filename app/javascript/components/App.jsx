@@ -37,13 +37,14 @@ function App() {
         })
     }
 
-    const updateTodo = (todoIndex, newName) => {
-        updateTodoThruApi(todos[todoIndex].id, newName).then((response) => {
+    const updateTodo = (todoIndex, newName, newStatus = undefined) => {
+        updateTodoThruApi(todos[todoIndex].id, newName, newStatus).then((response) => {
             if (response.status != 200) {
                 console.log(`Update todo ${todos[todoIndex]} failed`); return;
             }
             let newArr = [...todos]
             newArr[todoIndex].name = newName
+            if (newStatus != undefined) newArr[todoIndex].status = newStatus
             setTodos(newArr)
         })
     }
