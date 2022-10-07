@@ -1,24 +1,18 @@
-# README
+# Simple Todo App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a simple todo app implemented in Rails 7 + React JS.
 
-Things you may want to cover:
+### Screenshots
+![screenshot-1](https://github.com/shrimp509/rails-react-todo/blob/master/screenshots/screenshot-1.png)
 
-* Ruby version
+### Setup
+1. `$ git clone https://github.com/shrimp509/rails-react-todo.git`
+2. `$ bundle install`
+3. `$ yarn install`
+4. `$ ./bin/dev`
+5. Browse `127.0.0.1:3000`
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Using libraries:
+* `esbuild`: packing js files
+* `axios`: API calling
+* `mui`: MUI components
